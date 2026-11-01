@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VCCMAMA Virtual Card Platform — Complete Guide (English Edition)</title>
+<style>
+  :root{
+    --navy:#1f3a5f; --navy-deep:#16293f; --navy-soft:#33547e;
+    --beige:#f6f1e4; --cream:#fdfaf1; --sand:#efe7d2;
+    --gold:#b08d57; --gold-soft:#d5c19a;
+    --ink:#33322c; --muted:#8a7f66; --line:#e0d6bd;
+    --ok:#6d7d3f; --ok-bg:#f3f0dd;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:Georgia,"Times New Roman","Noto Serif SC","Songti SC","SimSun",serif;
+    background:var(--beige);
+    background-image:
+      repeating-linear-gradient(45deg, rgba(176,141,87,.035) 0 1px, transparent 1px 22px),
+      repeating-linear-gradient(-45deg, rgba(31,58,95,.03) 0 1px, transparent 1px 22px);
+    color:var(--ink);line-height:1.85;
+  }
+  a{color:var(--navy);text-decoration:none;border-bottom:1px dotted transparent;transition:border-color .2s}
+  a:hover{border-bottom-color:var(--gold)}
+  .container{max-width:1000px;margin:0 auto;padding:0 22px}
+
+  /* ---- Hero: navy lintel with lattice pattern ---- */
+  header.hero{
+    background:var(--navy-deep);color:#f2e8d0;padding:60px 0 46px;text-align:center;
+    border-bottom:4px double var(--gold);position:relative;overflow:hidden;
+  }
+  header.hero::before{
+    content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(213,193,154,.06) 0 1px, transparent 1px 30px),
+      repeating-linear-gradient(0deg, rgba(213,193,154,.06) 0 1px, transparent 1px 30px);
+  }
+  header.hero>*{position:relative}
+  .seal{
+    display:inline-block;margin-bottom:18px;padding:8px 16px;
+    font-size:.95rem;letter-spacing:3px;color:#e6d6ae;
+    border:2px solid var(--gold);border-radius:4px;background:rgba(255,255,255,.06);
+    box-shadow:0 0 0 4px rgba(176,141,87,.15);
+  }
+  header.hero h1{font-size:2.1rem;line-height:1.4;margin-bottom:14px;letter-spacing:.5px}
+  header.hero p{max-width:740px;margin:0 auto 20px;color:#cfc4a4;font-size:.98rem}
+  .btn{
+    display:inline-block;background:var(--gold);color:#fff;font-weight:700;
+    padding:11px 30px;border-radius:3px;margin:6px;letter-spacing:1.5px;
+    border:1px solid var(--gold);box-shadow:0 0 0 3px rgba(176,141,87,.18);
+  }
+  .btn:hover{background:#9a7a48;box-shadow:0 0 0 5px rgba(176,141,87,.28)}
+  .btn.ghost{background:transparent;color:#e6d6ae;border:1px solid var(--gold-soft);box-shadow:none}
+  .btn.ghost:hover{background:rgba(176,141,87,.15)}
+  .chips{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .chip{
+    border:1px solid var(--gold-soft);border-radius:2px;padding:3px 14px;
+    font-size:.82rem;color:#e0d3ae;letter-spacing:1px;background:rgba(255,255,255,.04);
+  }
+
+  /* ---- Sticky nav: navy band ---- */
+  nav.toc{background:var(--navy);border-bottom:3px double var(--gold);position:sticky;top:0;z-index:10}
+  nav.toc .container{display:flex;gap:16px;overflow-x:auto;padding:11px 22px}
+  nav.toc a{white-space:nowrap;font-size:.88rem;color:#e0d3ae;letter-spacing:.5px}
+  nav.toc a:hover{color:#fff;border-bottom:1px solid var(--gold)}
+
+  /* ---- Sections: double-rule headings ---- */
+  section{padding:52px 0;border-bottom:1px solid var(--line)}
+  section h2{
+    font-size:1.65rem;color:var(--navy);margin-bottom:8px;letter-spacing:1px;
+    display:flex;align-items:center;gap:12px;padding-bottom:10px;
+    border-bottom:3px double var(--gold);
+  }
+  section h2::before{
+    content:"";flex:none;width:11px;height:11px;background:var(--gold);
+    transform:rotate(45deg);box-shadow:0 0 0 3px rgba(176,141,87,.2);
+  }
+  section .meta{color:var(--muted);font-size:.85rem;font-style:italic;margin-bottom:22px}
+  section h3{font-size:1.18rem;margin:28px 0 10px;color:var(--navy);letter-spacing:.5px}
+  section h3::before{content:"◆";color:var(--gold);font-size:.6em;margin-right:9px;vertical-align:middle}
+  section h4{font-size:1rem;margin:18px 0 8px;color:var(--ink)}
+  p{margin-bottom:12px}
+  ul,ol{margin:0 0 14px 24px}
+  li{margin-bottom:6px}
+  ::selection{background:var(--gold-soft);color:var(--navy-deep)}
+
+  /* ---- Cards & callouts: cream panels, gold frames ---- */
+  .card{
+    background:var(--cream);border:1px solid var(--line);border-radius:4px;
+    padding:24px 26px;margin-bottom:18px;position:relative;
+  }
+  .card::before{
+    content:"";position:absolute;top:5px;left:5px;right:5px;bottom:5px;
+    border:1px solid rgba(176,141,87,.28);border-radius:2px;pointer-events:none;
+  }
+  .callout{
+    background:var(--sand);border:1px solid var(--gold-soft);border-left:5px solid var(--navy);
+    padding:15px 20px;margin:16px 0;border-radius:2px;
+  }
+  .callout.blue{border-left-color:var(--gold)}
+  .callout.green{border-left-color:var(--ok)}
+  .callout .t{font-weight:700;color:var(--navy);margin-bottom:4px;letter-spacing:.5px}
+  .callout .t::before{content:"※ ";color:var(--gold)}
+
+  /* ---- Tables: navy header band on cream ---- */
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem;background:var(--cream)}
+  th{background:var(--navy);color:#f2e8d0;text-align:left;letter-spacing:1px;font-weight:600}
+  th,td{border:1px solid var(--line);padding:9px 13px}
+  tr:nth-child(even) td{background:var(--sand)}
+
+  /* ---- Images: mounted like scroll paintings ---- */
+  .imgwrap{margin:20px 0;text-align:center}
+  .imgwrap img{
+    max-width:100%;background:var(--cream);padding:7px;border-radius:2px;
+    box-shadow:0 0 0 1px var(--gold-soft), 0 6px 18px rgba(22,41,63,.12);
+  }
+  .imgwrap figcaption{font-size:.82rem;color:var(--muted);font-style:italic;margin-top:10px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .grid .item{
+    background:var(--cream);border:1px solid var(--line);border-radius:4px;
+    padding:18px 20px;border-top:3px solid var(--gold);
+  }
+  .grid .item b{display:block;margin-bottom:5px;color:var(--navy);letter-spacing:.5px}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;text-align:center;margin:22px 0}
+  .stats .stat{background:var(--navy);color:#e0d3ae;border-radius:4px;padding:24px 16px;border-bottom:3px solid var(--gold)}
+  .stats .num{font-size:1.7rem;font-weight:700;color:var(--gold-soft);letter-spacing:1px}
+
+  .check li{list-style:none;position:relative;padding-left:28px}
+  .check li::before{
+    content:"✦";position:absolute;left:0;color:var(--gold);font-size:.9em;top:2px;
+  }
+
+  /* ---- Footer ---- */
+  footer{
+    background:var(--navy-deep);color:#b8ac89;text-align:center;
+    padding:40px 22px;font-size:.88rem;border-top:4px double var(--gold);
+  }
+  footer .high{color:#e6d6ae;font-weight:700;letter-spacing:2px;font-size:1rem;margin-bottom:10px}
+  footer a{color:var(--gold-soft)}
+  @media(max-width:640px){header.hero h1{font-size:1.45rem}section h2{font-size:1.35rem}}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO / TRANSLATED HOMEPAGE ============ -->
+<header class="hero">
+  <div class="container">
+    <div class="seal">VCCMAMA</div>
+    <p style="letter-spacing:3px;text-transform:uppercase;font-size:.8rem;color:#e0d3ae">Global Payment &amp; Collection</p>
+    <h1>VCCMAMA Virtual Card Platform — Cross-Border Virtual Credit Cards</h1>
+    <p>Secure payment solutions for <b>ad spending</b> and <b>AI subscriptions</b>. An enterprise-grade virtual credit card service from a professional card issuer, with real-time USDT top-ups — covering Facebook / TikTok / Google ad campaigns, ChatGPT Ads, ChatGPT / Claude and other AI tool subscriptions, cross-border e-commerce purchasing, and more. The VCCMAMA mobile app is live, so you can manage your virtual cards anytime, anywhere.</p>
+    <a class="btn" href="https://dashboard.fotoncard.com/#/pages/register?agent=388832">Get Started Now</a>
+    <a class="btn ghost" href="#about">Learn More</a>
+    <div class="chips">
+      <span class="chip">USDT Top-up</span><span class="chip">No Monthly Fee</span><span class="chip">3DS Verification</span>
+      <span class="chip">Multiple BINs</span><span class="chip">Bulk Card Issuing</span>
+      <span class="chip">ChatGPT Plus</span><span class="chip">Ad Billing</span><span class="chip">Overseas Shopping</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="container">
+    <a href="#about">About</a>
+    <a href="#advantages">Advantages</a>
+    <a href="#features">Platform Features</a>
+    <a href="#info">Fees</a>
+    <a href="#usecases">Use Cases</a>
+    <a href="#advertising">Ad Spending</a>
+    <a href="#ai-tools">AI Subscriptions</a>
+    <a href="#guide">Getting Started</a>
+    <a href="#tips">Tips &amp; Cautions</a>
+    <a href="#bins">Card BIN Guide</a>
+    <a href="#usdt">USDT Card</a>
+    <a href="#highvalue">High-Value VCC</a>
+    <a href="#nokyc">No-KYC Card</a>
+    <a href="#invite">Invite Code</a>
+    <a href="#deposit">USDT Deposit</a>
+    <a href="#chatgpt">ChatGPT Guide</a>
+    <a href="#claude">Claude Guide</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="container">
+    <h2>About VCCMAMA</h2>
+    <div class="card">
+      <h3>A Established Virtual Credit Card Issuer, Running Stably for 6 Years</h3>
+      <p>VCCMAMA (福田卡) is a veteran virtual credit card issuing platform that has been operating stably for six years. As a professional overseas card vendor and virtual card issuer, it offers a very rich selection of card types: multiple different BINs (card prefixes) to choose from, so you can match different cards to different purposes — and it is also well suited to issuing cards in large batches.</p>
+      <p>You can use it to pay for legitimate purposes such as ChatGPT Plus, ad fees, and overseas online shopping. It supports USDT top-ups with <b>no monthly fee</b>. Some BINs support 3DS verification, and the compatibility is worth praising.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">100+</div>Countries &amp; Regions Covered</div>
+      <div class="stat"><div class="num">50,000+</div>Partner Merchants</div>
+      <div class="stat"><div class="num">99.9%</div>System Availability</div>
+    </div>
+    <div class="callout blue">
+      <div class="t">💳 Sample Card Preview</div>
+      <p style="margin:0">The homepage shows a demo Mastercard visual: card number <b>4312 7856 0019 2847</b>, cardholder "Foton Card MEMBER", expiry <b>12/28</b> — illustrating the cards issued through the platform.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ADVANTAGES ============ -->
+<section id="advantages">
+  <div class="container">
+    <h2>Platform Advantages</h2>
+    <p>The platform deliberately maintains a certain entry threshold and reasonable user-policy restrictions, which effectively prevents abuse and improves stability.</p>
+    <div class="grid">
+      <div class="item"><b>🛡️ Entry Threshold</b>No business certification required — individual users can register directly, and USDT top-ups are KYC-free for greater convenience.</div>
+      <div class="item"><b>📈 Stable &amp; Reliable</b>Unlike low-barrier platforms that tend to collapse or run off with funds, VCCMAMA ensures continuous, stable service through sensible user policies.</div>
+      <div class="item"><b>🌐 Rich BIN Selection</b>Multiple card BINs to choose from, with bulk card issuing supported — ideal for users who issue cards at scale. As a professional issuer, VCCMAMA carries dozens of card BINs issued in Hong Kong, the United States, Singapore, and more.</div>
+    </div>
+    <h3>Why Choose VCCMAMA</h3>
+    <p>Simple design and dependable technology, safeguarding your cross-border business.</p>
+    <ul class="check">
+      <li><b>🌏 Global coverage</b> — supports multiple currencies and local payment methods, easily receiving payments from customers worldwide.</li>
+      <li><b>🔒 Security &amp; compliance</b> — enterprise-grade safeguards, including PCI DSS certification, data encryption, and risk-control systems.</li>
+      <li><b>⚡ Fast settlement</b> — automated settlement with real-time transaction tracking and rapid fund arrival.</li>
+      <li><b>📈 Data analytics</b> — comprehensive analytics and reporting so you can monitor every market in real time.</li>
+      <li><b>💰 Multi-currency support</b> — 100+ currencies with live exchange rates, low fees, and transparent transactions.</li>
+      <li><b>👥 Sub-account management</b> — a powerful "sub-account" system plus a professional card issuing center, convenient for ad marketers managing campaigns in groups.</li>
+    </ul>
+    <div class="imgwrap">
+      <figure>
+        <img src="dashboard.jpg" alt="VCCMAMA dashboard interface">
+        <figcaption>VCCMAMA management dashboard — one place to manage your virtual cards, top-ups, and transaction records.</figcaption>
+      </figure>
+    </div>
+    <div class="callout">
+      <div class="t">🎬 Platform Introduction Video</div>
+      <p style="margin:0">The original homepage embeds an introduction video (hosted on the source site) that visually walks through VCCMAMA registration, top-up, and card issuing. The video cannot be bundled into this offline file — visit the original page to watch it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEES ============ -->
+<section id="info">
+  <div class="container">
+    <h2>Key Information &amp; Fee Schedule</h2>
+    <p>Clear and transparent pricing, so you can spend with confidence.</p>
+    <div class="card">
+      <h3>VCCMAMA Fee Description</h3>
+      <p>The table below lists the platform's base rates; enterprise users enjoy even better pricing.</p>
+      <table>
+        <tr><th>Item</th><th>Details</th></tr>
+        <tr><td>Top-up methods</td><td>USDT, USD bank transfer</td></tr>
+        <tr><td>Minimum top-up</td><td>20 USDT</td></tr>
+        <tr><td>Top-up fee</td><td>1–3% (depends on user tier)</td></tr>
+        <tr><td>Monthly fee</td><td>None. Card issuing fee is USD 2–3 per card; discounts negotiable for large volumes</td></tr>
+        <tr><td>KYC verification</td><td>No KYC required — USDT top-ups need no verification</td></tr>
+        <tr><td>Important notes</td><td>Not supported: linking to domestic (mainland China) platforms such as WeChat or Alipay for spending. <b>Note:</b> to keep card BINs running stably long-term and filter out freebie-abuse users, the platform has a <b>security deposit system</b>: you must pay a USD 100 deposit before issuing your first card; the deposit is refundable once your chargeback and refund rates meet the required standard.</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USE CASES ============ -->
+<section id="usecases">
+  <div class="container">
+    <h2>Use Cases</h2>
+    <p>As a professional VCC issuing platform, VCCMAMA covers mainstream international online payment needs — one card, many uses.</p>
+    <div class="grid">
+      <div class="item"><b>🤖 AI Subscriptions</b>ChatGPT, Claude, Midjourney, and more</div>
+      <div class="item"><b>📢 Ad Spending</b>Facebook, Google, TikTok ad fees</div>
+      <div class="item"><b>🛒 Cross-border E-commerce</b>Amazon, eBay, AliExpress, Shopify</div>
+      <div class="item"><b>📺 Streaming</b>Netflix, YouTube Premium, Spotify</div>
+      <div class="item"><b>✈️ Travel &amp; Flights</b>International flights, hotels, OTA platforms</div>
+      <div class="item"><b>💻 Cloud Services</b>Google Cloud, AWS, Azure</div>
+      <div class="item"><b>📱 App Stores</b>Google Play, Apple App Store</div>
+      <div class="item"><b>💰 Overseas Shopping</b>International e-commerce and proxy purchasing</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ADVERTISING ============ -->
+<section id="advertising">
+  <div class="container">
+    <h2>Advertising Solutions</h2>
+    <p>As a professional overseas card vendor, VCCMAMA is deeply optimized for Facebook / TikTok / Google ad scenarios and supports ChatGPT Ads placements.</p>
+
+    <div class="card">
+      <h3>📢 Facebook / Meta Ads</h3>
+      <p><b>Why do advertisers need virtual cards?</b> Facebook ad spend is heavy and billing is frequent; physical bank cards easily trigger risk-control freezes. VCCMAMA virtual cards support running many cards in parallel — one account can issue multiple cards, each bound to a different ad account, effectively isolating risk.</p>
+      <ul>
+        <li><b>BIN selection:</b> the 456599 BIN is recommended — it supports 3DS verification codes and has a high card-linking success rate.</li>
+        <li><b>Multi-card strategy:</b> issue separate cards for different ad accounts (main and backup) to avoid concentrating risk on a single card.</li>
+        <li><b>Bulk issuing:</b> enterprise users can issue cards in bulk to meet the scale needs of ad teams.</li>
+        <li><b>Cost advantage:</b> enterprise rates as low as 1%; better pricing available for heavy spend.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🎬 TikTok Ads — TikTok for Business</h3>
+      <p>TikTok ads are similar to Facebook; US/UK virtual cards are supported. It is advisable to issue a separate card for each ad account for easy reconciliation and risk isolation.</p>
+      <ul>
+        <li><b>Recommended BINs:</b> mainstream BINs such as 456599 and 556150 all work normally.</li>
+        <li><b>Billing address:</b> use an address consistent with the ad account's registration information.</li>
+        <li><b>Cautions:</b> some obscure BINs may be rejected by TikTok — prefer BINs that have been tested.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🔍 Google Ads &amp; the Developer Ecosystem</h3>
+      <p>Google Ads has a fixed billing cycle, and virtual cards fit the monthly billing model perfectly. Google Cloud, Google Play developer accounts, and similar scenarios are also supported.</p>
+      <ul>
+        <li><b>Stable billing:</b> Google auto-charges on the billing date — just keep the card balance sufficient.</li>
+        <li><b>One card, many uses:</b> the same card can be linked to both Google Ads and Google Cloud.</li>
+        <li><b>Developer scenarios:</b> supports the one-time USD 25 Google Play developer registration fee.</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="t">💡 Ad Spending Tips</div>
+      <ul style="margin:0">
+        <li>For your first card, top up a small amount to test; add more balance only after card linking succeeds.</li>
+        <li>If an ad account is banned, promptly unlink and close the corresponding virtual card to avoid extra fees.</li>
+        <li>Enterprise users can contact customer service about a bulk card-issuing API to boost operational efficiency.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI TOOLS ============ -->
+<section id="ai-tools">
+  <div class="container">
+    <h2>AI Tool Subscription Solutions</h2>
+    <p>As a professional virtual card issuer, VCCMAMA solves the difficulty of paying for global AI tool subscriptions in one stop.</p>
+
+    <div class="card">
+      <h3>🤖 Overview of Supported AI Tools</h3>
+      <p><b>Mainstream AI tools can all be subscribed.</b> Tested in practice, the following AI tools can be successfully subscribed with VCCMAMA virtual cards:</p>
+      <ul>
+        <li><b>ChatGPT / OpenAI:</b> Plus ($20/mo), Team, and Enterprise plans; the 456599 BIN is recommended.</li>
+        <li><b>Claude / Anthropic:</b> Pro ($20/mo) and Team plans.</li>
+        <li><b>Midjourney:</b> Standard ($30/mo), Pro ($60/mo), and other plans.</li>
+        <li><b>GitHub Copilot:</b> Individual ($10/mo) and Business ($19/mo) plans.</li>
+        <li><b>Cursor / Codeium:</b> Pro subscription supported.</li>
+        <li><b>Perplexity AI:</b> Pro ($20/mo) plan supported.</li>
+        <li><b>Notion AI:</b> AI add-on subscription supported.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>⚠️ Important: IP Address Requirements</h3>
+      <p>AI tools check not only the card's issuing country but also your IP address. Please make sure to:</p>
+      <ul>
+        <li>Use a clean, native IP line (not a datacenter/proxy IP).</li>
+        <li>Match the IP's country with the card's issuing country (US card + US IP).</li>
+        <li>Avoid frequently switching IP addresses — keep the IP stable.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Recommended BINs &amp; Configuration</h3>
+      <ul>
+        <li><b>First choice BIN:</b> 456599 (tested to support ChatGPT and Claude).</li>
+        <li><b>Alternative BINs:</b> 556150, 486695 (verify by testing).</li>
+        <li><b>Billing address:</b> a randomly generated US address works fine.</li>
+        <li><b>Top-up advice:</b> first top up $25–30, then top up as needed once the subscription succeeds.</li>
+      </ul>
+      <div class="callout">
+        <div class="t">💡 AI Subscription Tips</div>
+        <ul style="margin:0">
+          <li>Issue separate cards for different AI tools for easier management and renewal reminders.</li>
+          <li>Test with a $1 small charge before subscribing to confirm the card works.</li>
+          <li>Keep subscription screenshots and card credentials for future reference.</li>
+          <li>If payment fails, check the IP issue first — not the card.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUIDE ============ -->
+<section id="guide">
+  <div class="container">
+    <h2>How-To Guide: From Registration to Card Issuing in Three Steps</h2>
+    <div class="callout">
+      <div class="t">⚠️ Important</div>
+      <p style="margin:0">VCCMAMA supports USDT top-ups with <b>no KYC verification</b>. Individual users can register and use the platform directly.</p>
+    </div>
+
+    <div class="card">
+      <h3>Step 1 — Register an Account</h3>
+      <p>Register with an email address: fill in a username, password, and other details, then submit. After registering and logging in, you can top up and issue cards right away — <b>no identity verification needed</b>. No authentication; USDT top-ups are KYC-free, so you can use the platform's services directly.</p>
+    </div>
+
+    <div class="card">
+      <h3>Step 2 — Top Up Your Wallet</h3>
+      <p>Go to <b>Account Overview → Top Up → USD Online Top-up → choose USDT top-up</b>.</p>
+      <p><b>USDT top-up notes:</b></p>
+      <ul>
+        <li>Only the USDT-TRC20 network is supported.</li>
+        <li>Minimum top-up: 20 USDT.</li>
+        <li>A top-up fee applies (see the fee table).</li>
+        <li>Funds topped up via USDT can only be spent — they cannot be withdrawn.</li>
+        <li>Because the fee is relatively high and funds can't be withdrawn, avoid topping up too much at once.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Step 3 — Issue a Virtual Card</h3>
+      <p>Click <b>Card Overview → Quick Issue Card</b> to enter the card issuing center, where multiple BINs are available. If you're unsure which to pick, ask customer service for a recommendation.</p>
+      <ul>
+        <li><b>Issuing cost:</b> top-up fee of 1–3% + card fee of USD 2–3 per card; volume discounts negotiable.</li>
+        <li><b>Billing address:</b> you can first click "Random Address," then change the name to your own romanized name (e.g., surname ZHANG, given name SAN).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIPS ============ -->
+<section id="tips">
+  <div class="container">
+    <h2>Usage Tips &amp; Cautions</h2>
+
+    <div class="card">
+      <h3>Usage Tips</h3>
+      <ul>
+        <li><b>Small-amount tests first:</b> when paying with a new card for the first time, test with a small amount ($1–5), then spend larger amounts once payment succeeds.</li>
+        <li><b>Multi-card isolation:</b> issue separate cards for different business lines (ads, AI subscriptions, e-commerce) so a single card's risk doesn't affect everything.</li>
+        <li><b>BIN selection:</b> prefer community-verified BINs (e.g., 456599); test new BINs thoroughly first.</li>
+        <li><b>Billing address:</b> after generating a random address, change the name to your own romanized name; the randomly generated address itself can stay.</li>
+        <li><b>Balance management:</b> top up according to your actual spending cycle and avoid leaving large sums idle on the card.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Top-ups &amp; Fees</h3>
+      <ul>
+        <li><b>USDT top-up:</b> TRC20 network only; topped-up funds cannot be withdrawn.</li>
+        <li><b>USD transfer:</b> wire transfer supported, suited to large top-ups at lower rates.</li>
+        <li><b>Service rates:</b> regular users 3%, professional users 2%, enterprise users 1% — the more you spend, the lower the rate.</li>
+        <li><b>Card issuing fee:</b> USD 2–3 per card; volume discounts negotiable.</li>
+        <li><b>Security deposit system:</b> to keep BINs running stably long-term and filter out freebie-abusers, a USD 100 deposit is required before issuing cards; it is refundable once chargeback/refund rates meet the standard.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Security &amp; Compliance</h3>
+      <ul>
+        <li><b>Identity verification:</b> no KYC required — USDT top-ups need no verification; use it right away.</li>
+        <li><b>Card safekeeping:</b> virtual card details are the same as a bank card's — never share screenshots with others.</li>
+        <li><b>Compliant use:</b> only for compliant scenarios such as cross-border e-commerce, ad marketing, and AI subscriptions; crypto and financial merchants are not supported.</li>
+        <li><b>Risk is yours:</b> virtual card policies may change — always defer to the platform's latest official announcements.</li>
+      </ul>
+      <div class="callout">
+        <div class="t">⚠️ Important Reminder</div>
+        <p style="margin:0">Funds topped up via USDT <b>cannot be withdrawn</b> — they can only be spent. Top up sensibly based on actual needs to avoid idle funds. VCCMAMA supports USDT top-ups with no KYC verification.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BINS PAGE ============ -->
+<section id="bins">
+  <div class="container">
+    <p class="meta">Translated from "virtual-card-bins.html" · Published Aug 10, 2026 · Card BIN Guide</p>
+    <h2>Which Card BINs Does VCCMAMA Offer, and What Are They For?</h2>
+
+    <h3>A Quick Summary of the VCCMAMA BIN System</h3>
+    <p>In terms of quantity, <b>VCCMAMA currently operates 14 card BINs</b>: 4367, 4866, 4***, 529366, 527375, 544923, 558325, 545020, 658706, 524897, 553370, 556371, 556167, and 553437. These are just the BINs currently listed — behind the scenes, VCCMAMA partners with numerous card-issuing banks in the US, Hong Kong, and the UK. Beyond the 14 live BINs, it also holds a rich reserve of BIN resources, updating its card lineup as needed: adding fresh BINs and retiring older ones.</p>
+    <p>In terms of issuing regions, VCCMAMA's BIN resources cover the <b>United States, Hong Kong, Singapore, and the UK</b>. US virtual cards are the most universally usable, covering online payments in most of the world. The Hong Kong, Singapore, and UK BINs complement the US cards. Together they fully handle your globally covered international online payment needs.</p>
+    <p>In terms of card networks, both Mastercard and Visa are available — plus a market-exclusive "<b>Discover</b>" virtual card!</p>
+
+    <div class="callout blue">
+      <div class="t">BIN Overview</div>
+      <ul style="margin:0">
+        <li><b>Quantity:</b> 14 operating BINs + a rich reserve.</li>
+        <li><b>Issuing regions:</b> US, Hong Kong, Singapore, UK.</li>
+        <li><b>Networks:</b> Mastercard, Visa, and Discover (exclusive).</li>
+      </ul>
+    </div>
+
+    <h3>A Few Star BINs</h3>
+    <table>
+      <tr><th>BIN</th><th>Issuing Region</th><th>Network</th><th>Best Use</th><th>Per-Transaction Cap</th></tr>
+      <tr><td><b>4367</b></td><td>Hong Kong</td><td>Visa</td><td>Facebook/Google Ads, OpenRouter</td><td>$100,000</td></tr>
+      <tr><td><b>4866</b></td><td>United States</td><td>Visa</td><td>ChatGPT Ads, large US e-commerce payments</td><td>$100,000</td></tr>
+      <tr><td><b>529366</b></td><td>United States</td><td>Mastercard</td><td>ChatGPT / Claude / Gemini subscriptions</td><td>$10,000</td></tr>
+    </table>
+    <div class="grid">
+      <div class="item"><b>Hong Kong Visa 4367</b>Specially suited — and restricted — to Facebook Ads and Google Ads payments, plus buying tokens on the currently popular AI aggregator platform OpenRouter. Other scenarios are not yet open to this BIN.</div>
+      <div class="item"><b>US Visa 4866</b>Currently popular. It sweeps through payments at US e-commerce platforms and shines especially on ChatGPT Ads — one of the few US BINs with a very high approval rate for AI-related ad payments. It's currently limited to ad payments and other large US online payments.</div>
+      <div class="item"><b>US Mastercard 529366</b>A rare US virtual card positioned for AI paid subscriptions — ChatGPT, Claude, Gemini, and more. It works smoothly, and like US cards generally you can customize the cardholder name and billing address to pass AVS verification perfectly.</div>
+    </div>
+    <p>These three are VCCMAMA's star BINs; to keep each BIN stable, they are currently limited to the specific payment scenarios above. The other virtual cards are general-purpose BINs usable for all kinds of online subscriptions and payments, with no scenario restrictions.</p>
+
+    <h3>Very High Per-Transaction Spending Limits</h3>
+    <p>VCCMAMA's BINs are all enterprise-grade cards with high per-transaction caps. For example, BINs 4367 and 4866 allow up to <b>$100,000 per transaction</b>, while other BINs cap at $10,000 per transaction. Limits this high are especially suitable for enterprises and studios making large online payments — an advantage personal credit cards simply can't match.</p>
+  </div>
+</section>
+
+<!-- ============ USDT CARD PAGE ============ -->
+<section id="usdt">
+  <div class="container">
+    <p class="meta">Translated from "usdt-virtual-card.html" · Published Aug 14, 2026 · USDT Virtual Card</p>
+    <h2>VCCMAMA Is the Best USDT Virtual Card ("U Card") on the Market</h2>
+
+    <h3>What Is a "USDT Virtual Card" (U Card)?</h3>
+    <p>USDT needs no introduction — it's the US-dollar stablecoin issued by Tether. It isn't a real US dollar, but in worldwide usage today USDT is effectively equivalent to the dollar, and in some scenarios it even works better than real dollars!</p>
+    <p>Even though USDT is so convenient, only a minority of mainstream online services and e-commerce platforms accept it directly; most merchants still primarily accept traditional Mastercard, Visa, or American Express credit cards. So here's the problem: if you hold a lot of USDT but need to shop on Amazon or subscribe to ChatGPT, what do you do? The old way is to convert USDT into US dollars, transfer the dollars to your bank account, then spend with a Mastercard/Visa card. That works, but the conversion wastes fees, and the exchange loss is significant — hardly worthwhile. Worse, if the OTC dealer you use is problematic, you could receive "tainted" money and get your bank account frozen — a net loss.</p>
+    <p>That's why the <b>"USDT virtual card"</b> was born! It solves the scenario where you hold crypto but need a Mastercard/Visa card for international online payments. You can top up your USDT directly into a virtual card issuing platform, then open Mastercard/Visa virtual cards of different BINs or issuing regions there for international online payments — avoiding all the friction and loss of converting USDT to fiat.</p>
+
+    <h3>What Are the Characteristics of a USDT Virtual Card?</h3>
+    <ol>
+      <li><b>Crypto top-ups:</b> although called "USDT virtual cards," many issuing platforms also accept other dollar stablecoins such as USDC, PYUSD, and USD1. USDT is just the most widely used, so the name stuck.</li>
+      <li><b>Anonymity:</b> USDT requires no real-name authentication and no KYC to hold, and topping up a card platform with it is anonymous too — so nearly the entire chain from opening to using the card stays anonymous. In today's era of rampant telecom fraud, this is a core demand of users everywhere.</li>
+      <li><b>Instantness:</b> USDT and other crypto top-ups usually run over common blockchains like ETH or TRON, which are fast — funds typically arrive within minutes. Traditional USD funding takes about 3 business days via ACH or roughly a week via SWIFT international wire — painfully slow. Crypto's speed will inevitably replace the old, slow transfer methods.</li>
+    </ol>
+
+    <div class="callout green">
+      <div class="t">Three Core Advantages of USDT Virtual Cards</div>
+      <ul style="margin:0">
+        <li><b>Crypto top-ups:</b> fund directly with USDT, USDC, PYUSD, and other dollar stablecoins.</li>
+        <li><b>Anonymity:</b> USDT requires no KYC — the top-up and card-opening process is nearly anonymous end to end.</li>
+        <li><b>Instantness:</b> TRC20 and other blockchain networks arrive in minutes, far faster than traditional transfers.</li>
+      </ul>
+    </div>
+
+    <h3>Any Recommendations for a Stable, Reliable, Easy-to-Use USDT Virtual Card?</h3>
+    <p>Absolutely. For stability and reliability, <b>VCCMAMA</b> is the leading name in the USDT "U card" space! Say nothing else — it has run stably for a full six years. Ask yourself: what other U-card platform lasts that long? Most shut down or abscond with funds after a year or two. VCCMAMA supports both USDT crypto top-ups and corporate USD bank transfers. For individuals and businesses, USDT top-up is the recommended route: fast, convenient, and timely. If you're a cross-border e-commerce seller with dollar funds, corporate USD bank transfer works too.</p>
+
+    <div class="imgwrap">
+      <figure>
+        <img src="ft-topup.jpg" alt="VCCMAMA USDT top-up interface">
+        <figcaption>VCCMAMA's USDT top-up screen: the platform provides a TRON (Tron) wallet address; you send USDT to it from your Web3 wallet or exchange, funds arrive in minutes, and you can then open a virtual U card.</figcaption>
+      </figure>
+    </div>
+
+    <div class="callout">
+      <div class="t">First Top-up Reminder</div>
+      <p style="margin:0">Be sure to select the <b>Tron chain (TRC20)</b> — don't pick the wrong blockchain. For your first top-up, at least <b>$150</b> is advised (including the $100 security deposit); the deposit is returned to your account later. It's a stability mechanism to filter out freebie-abuse users.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HIGH-VALUE PAGE ============ -->
+<section id="highvalue">
+  <div class="container">
+    <p class="meta">Translated from "high-value-payment-vcc.html" · Published Sep 2, 2026 · High-Value Payments</p>
+    <h2>Mastercard/Visa Virtual Credit Cards Supporting Very Large Single Payments</h2>
+    <p>For cross-border enterprises and studio users with large international purchases and ad-fee payments, a Mastercard/Visa virtual card that supports very large single transactions becomes a necessity. Ordinary personal credit cards usually have online payment limits — perhaps a few thousand dollars per transaction, failing beyond that. Enterprise-grade Mastercard/Visa virtual credit cards carry extremely high per-transaction caps, ideal for the extra-large online payments of cross-border business.</p>
+    <p>Here is a summary of the per-transaction spending caps of the various BINs currently operating on VCCMAMA:</p>
+    <table>
+      <tr><th>Card BIN</th><th>Per-Transaction Cap</th><th>Issuing Region</th></tr>
+      <tr><td><b>4367</b></td><td>$100,000</td><td>Hong Kong</td></tr>
+      <tr><td><b>4866</b></td><td>$100,000</td><td>US</td></tr>
+      <tr><td><b>527375</b></td><td>$100,000</td><td>US</td></tr>
+      <tr><td><b>529366</b></td><td>$5,000</td><td>US</td></tr>
+      <tr><td><b>544923</b></td><td>$10,000</td><td>US</td></tr>
+      <tr><td><b>558325</b></td><td>$10,000</td><td>US</td></tr>
+      <tr><td><b>545020</b></td><td>$10,000</td><td>US</td></tr>
+      <tr><td><b>658706</b> (Discover)</td><td>$10,000</td><td>US</td></tr>
+    </table>
+    <div class="callout blue">
+      <div class="t">High-Value BIN Recommendations</div>
+      <ul style="margin:0">
+        <li><b>First choices:</b> 4367 / 4866 / 527375 — up to $100,000 per transaction.</li>
+        <li><b>Others:</b> 544923 / 558325 / 545020 / 658706 — up to $10,000 per transaction.</li>
+      </ul>
+    </div>
+    <p>Two VCCMAMA BINs support single payments of up to $100,000 — more than enough for enterprise-level, extra-large international online payments. The other BINs cap at $10,000 per transaction, which is also plenty for small and mid-size studios.</p>
+    <p>Owning a high-limit virtual credit card lets your business pay confidently while going global, without worrying that payment hiccups will derail your procurement.</p>
+  </div>
+</section>
+
+<!-- ============ NO-KYC PAGE ============ -->
+<section id="nokyc">
+  <div class="container">
+    <p class="meta">Translated from "no-kyc-virtual-card.html" · Published Jul 26, 2026 · ~5 min read</p>
+    <h2>No-KYC Anonymous Virtual Credit Cards — KYC-Free USDT-Topup Mastercard/Visa</h2>
+
+    <h3>What Is a No-KYC Anonymous Virtual Credit Card?</h3>
+    <p>An "anonymous virtual credit card" is a Mastercard or Visa virtual card you can create online <b>without KYC identity verification</b> — issued without uploading any personal ID documents. All you need is an email address to register; the whole process requires no ID card, passport, or other sensitive personal information.</p>
+    <div class="callout blue">
+      <div class="t">Core Traits of an Anonymous Virtual Card</div>
+      <ul style="margin:0">
+        <li><b>No KYC:</b> upload no identity documents — your privacy stays protected.</li>
+        <li><b>USDT top-ups:</b> crypto top-ups supported, further protecting your privacy.</li>
+        <li><b>Top up as you spend:</b> load only what you'll use; funds stay safe and controllable.</li>
+        <li><b>Instant issuing:</b> cards open online instantly — no waiting for review.</li>
+      </ul>
+    </div>
+
+    <h3>Why Do You Need an Anonymous Mastercard/Visa Virtual Card?</h3>
+    <p>Telecom and online fraud is rampant these days. Registering for various online services inevitably means uploading your phone number, ID, passport, and bank card details to websites. But because some platforms have security holes, hackers breach them and harvest users' private data, or platform employees illegally sell it to black/grey-market teams — leading to constant harassment from fraud calls and spam, or even financial losses.</p>
+    <p>An anonymous virtual credit card that can pay freely across the internet <b>without real-name authentication</b> has therefore become a must-have for online subscription payments. Even if your card number leaks, fraudsters can't obtain your real identity.</p>
+    <div class="imgwrap">
+      <figure>
+        <img src="moutuan1.jpg" alt="Anonymous virtual card privacy protection">
+        <figcaption>Example illustration: a data leak at a large group-buying website exposed card information.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Protecting Your Funds: "Top Up As You Spend" Peace of Mind</h3>
+    <p>Beyond privacy, anonymous virtual cards protect your money. On less trustworthy overseas e-commerce sites you enter card number, expiry, and CVV; once hackers steal these details, funds on the card are easily siphoned. Take the well-known data leak at a large group-buying site: the author's Mastercard was linked there for routine food delivery, and after the breach the card statement mysteriously showed several failed 1–3 dollar micro-payments. Clearly, hackers had obtained the card number and were running "card-testing" probes — and had a small test payment succeeded, large-scale fraud would have followed.</p>
+    <div class="imgwrap">
+      <figure>
+        <img src="moutuan2.jpg" alt="Virtual card fund protection">
+        <figcaption>Failed small-amount "card testing" attempts visible on the statement after a data breach.</figcaption>
+      </figure>
+    </div>
+    <div class="callout">
+      <div class="t">Security Warning</div>
+      <p style="margin:0">Increasingly powerful AI models keep appearing, and jailbreak incidents involving models like Claude and ChatGPT happen frequently. These models have strong capabilities for network attacks and vulnerability discovery, and weakly protected sites easily get breached, leaking user data. <b>Using a no-KYC anonymous virtual card effectively lowers that risk.</b></p>
+    </div>
+
+    <h3>VCCMAMA: An Anonymous Virtual Card Platform with No KYC</h3>
+    <p>For the privacy and fund-safety problems above, an instant virtual credit card with <b>no KYC and pay-as-you-go top-ups</b> is a genuine necessity — and <b>VCCMAMA</b> is exactly such a platform.</p>
+    <div class="callout green">
+      <div class="t">Advantages of the VCCMAMA Anonymous Card</div>
+      <ul style="margin:0">
+        <li><b>No KYC:</b> register with just an email; upload no identity documents at all.</li>
+        <li><b>Top up as you spend:</b> load exactly as much as you plan to use.</li>
+        <li><b>USDT top-ups:</b> supports the popular USDT stablecoin, protecting privacy.</li>
+        <li><b>Fund safety:</b> if the card is compromised, you only lose the limited balance on it.</li>
+        <li><b>Mastercard &amp; Visa:</b> global online payment support, unrestricted across the internet.</li>
+      </ul>
+    </div>
+    <p>Worst case, a stolen card only costs you the limited funds on it — far more reassuring than having a real physical bank card with large balances skimmed. VCCMAMA also supports USDT top-ups, which besides convenience are a strong privacy-protecting measure compared with traditional fiat funding.</p>
+  </div>
+</section>
+
+<!-- ============ INVITE CODE PAGE ============ -->
+<section id="invite">
+  <div class="container">
+    <p class="meta">Translated from "fotoncard-Invitation-code-388832.html" · Published Oct 4, 2026 · Registration Guide</p>
+    <h2>The VCCMAMA Registration Invite Code Is <span style="color:var(--gold)">388832</span></h2></h2>
+
+    <h3>Things to Know Before Registering</h3>
+    <p>The VCCMAMA platform is a <b>closed, invite-only</b> Mastercard/Visa virtual card platform. That means you can't simply visit the official site fotoncard.com and register directly — you need an exclusive registration invite code to sign up successfully.</p>
+    <div class="callout">
+      <div class="t">Registration Notes</div>
+      <p style="margin:0">VCCMAMA is <b>invite-only</b>; direct registration on the official site cannot open an account. You must enter an exclusive invite code to create an account — have a valid code ready in advance.</p>
+    </div>
+
+    <h3>What Is the VCCMAMA Invite Code?</h3>
+    <p>The latest, currently valid VCCMAMA registration invite code is <b>388832</b>. You must enter this code when registering — without it, registration is impossible. It's a required field! See the screenshot below:</p>
+    <div class="imgwrap">
+      <figure>
+        <img src="futianka.jpg" alt="VCCMAMA invite code 388832 entry example">
+        <figcaption>Example of entering invite code 388832 during VCCMAMA registration.</figcaption>
+      </figure>
+    </div>
+    <div class="callout blue">
+      <div class="t">Registration Invite Code</div>
+      <ul style="margin:0">
+        <li><b>Invite code:</b> <b>388832</b> (required at registration).</li>
+        <li><b>Registration entry:</b> the dedicated invite link auto-fills the code — open it and the code is already filled in, no manual entry needed.</li>
+      </ul>
+    </div>
+
+    <h3>What Benefits Come with the Invite Code?</h3>
+    <p>Registering with the VCCMAMA invite code <b>388832</b> grants the following perks:</p>
+    <ol>
+      <li>24/7/365 non-stop online customer service, handling your card issues at any time.</li>
+      <li>Priority (expedited) processing for refunds and withdrawals.</li>
+      <li>The right to request preferential rates from the platform.</li>
+      <li>Priority access to newly listed card BINs.</li>
+    </ol>
+    <p>To see which BINs are available, check the VCCMAMA BIN guide; for USDT top-ups and card issuing, see the USDT virtual card tutorial.</p>
+  </div>
+</section>
+
+<!-- ============ USDT DEPOSIT PAGE ============ -->
+<section id="deposit">
+  <div class="container">
+    <p class="meta">Translated from "foton-card-usdt-deposit.html" · Published Oct 8, 2026 · USDT Virtual Card</p>
+    <h2>VCCMAMA Accepts USDT Deposits: Registration, Top-Up, and Card BINs Explained</h2>
+    <p>Sitting on a pile of USDT and wanting to subscribe to ChatGPT, shop overseas, or pay for international online services — but stuck without a convenient off-ramp? Virtual card platforms that accept USDT deposits directly now exist, and VCCMAMA is one of the most representative. Its biggest highlight is <b>direct USDT top-ups</b>: fast arrival and a low entry barrier. This article walks through the whole flow — registration, top-up, and available BINs — step by step.</p>
+    <div class="imgwrap">
+      <figure>
+        <img src="foton-usdt-intro.png" alt="VCCMAMA USDT deposit platform introduction">
+        <figcaption>Introduction to VCCMAMA as a USDT-deposit virtual card platform.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Registration: A USDT Virtual Credit Card in Three Steps</h3>
+    <p>VCCMAMA's registration is friendly and nearly barrier-free — just three steps:</p>
+    <ol>
+      <li>Enter your email address;</li>
+      <li>Check your inbox for the verification code and enter it;</li>
+      <li>Set a password you'll remember — done.</li>
+    </ol>
+    <p>One small pitfall: the platform appears to <b>not support Microsoft email domains</b>. Avoid Outlook, Hotmail, and the like, or the verification code may never arrive and your effort is wasted. Gmail and other mainstream international mailboxes are recommended — reliable delivery, less junk-folder risk.</p>
+    <p>Also note that VCCMAMA uses closed, invite-only registration: you must enter the exclusive invite code <b>388832</b> when signing up (see the Invite Code section above for details).</p>
+    <div class="imgwrap">
+      <figure>
+        <img src="foton-usdt-register.png" alt="VCCMAMA registration process screenshot">
+        <figcaption>VCCMAMA registration flow screenshot.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Top-Up Methods: USDT Arrives Instantly</h3>
+    <p>There are two main ways to fund VCCMAMA. One is bank wire transfer — not recommended, as it's slow and funds usually take two to three days to arrive. The other, strongly recommended, is a <b>USDT deposit</b>, whose biggest advantage is instant arrival.</p>
+    <div class="imgwrap">
+      <figure>
+        <img src="foton-usdt-deposit.png" alt="VCCMAMA USDT deposit instructions">
+        <figcaption>VCCMAMA USDT deposit instructions screenshot.</figcaption>
+      </figure>
+    </div>
+    <ol>
+      <li><b>Get the channel right:</b> when transferring, always choose the TRON (TRC20) channel — never the wrong chain.</li>
+      <li><b>Don't send the wrong coin:</b> only USDT is accepted. Wrongly sending Bitcoin, Ethereum, or other coins means the funds are unrecoverable.</li>
+      <li><b>Minimum amount:</b> at least 1 USDT; the system ignores anything less.</li>
+      <li><b>About fees:</b> the platform charges a 1.5% processing fee. For example, if you send 100 USDT, after the fee your account receives 98.5 USD.</li>
+      <li><b>Safe and reliable:</b> every transfer is recorded on-chain — public, transparent, and tamper-proof.</li>
+    </ol>
+    <p>Overall, TRC20 transfers usually confirm within minutes and are the most cost-effective funding method. For operational details, the homepage's USDT top-up tutorial follows the same approach.</p>
+
+    <h3>Available BINs: 11 Card Prefixes Covering Mainstream Scenarios</h3>
+    <p>VCCMAMA offers an unusually rich card selection. The platform launched with 7 solid BINs:</p>
+    <div class="card"><b>556766 · 428837 · 472593 · 222929 · 222934 · 540524 · 557271</b></div>
+    <p>Better still, the lineup keeps growing. On March 20, 2023, the platform added 4 brand-new BINs in one go:</p>
+    <div class="card"><b>529587 · 538738 · 526144 · 418122</b></div>
+    <p>That makes 11 different card prefixes in total — very rich resources for a virtual card platform, greatly improving payment success rates across scenarios. Note: the BIN list adjusts as partner issuing banks change; the live list in the card-issuing center is authoritative. More BIN knowledge is in the BIN guide, and for the linked-ban risks of cheap secondary BINs see the low-price card risk guide.</p>
+    <div class="imgwrap">
+      <figure>
+        <img src="foton-usdt-bins.png" alt="VCCMAMA available BIN list screenshot">
+        <figcaption>Screenshot of VCCMAMA's available card BIN list.</figcaption>
+      </figure>
+    </div>
+
+    <h3>A Note on Wise Activation: Three BINs Are Now Blocked</h3>
+    <p>If your main goal in getting this card is to activate a Wise account, read this carefully. Per the platform's notice, the following 3 BINs have been <b>blacklisted by Wise</b> and can no longer be used for activation:</p>
+    <div class="card"><b>222929 · 557271 · 222934</b></div>
+    <p>Frankly, this isn't unique to VCCMAMA. The broader environment has shifted: activating Wise with a virtual card is now essentially a dead end and getting harder all the time. If that's your goal, temper your expectations and look for another route.</p>
+
+    <h3>Pros &amp; Cons Summary</h3>
+    <div class="grid">
+      <div class="item"><b>✔ True "anonymous card," no KYC</b>Its trump card. Just an email to register and start using — no ID card, passport, or real-name info uploaded at any step. A blessing for privacy-minded users and a common choice for anonymous-card users.</div>
+      <div class="item"><b>✔ Highly customizable details</b>You can set your own cardholder name and billing address when issuing — very handy for linking US PayPal or passing address-verification payment scenarios.</div>
+      <div class="item"><b>✔ Transparent fees, low barrier</b>Simple pricing: card issuing fee + top-up fee only, no monthly or hidden fees. Minimum top-up just 1 USDT — very flexible.</div>
+      <div class="item"><b>✔ Broad use cases</b>Everyday overseas shopping, linking a US PayPal account, cross-border e-commerce platform rent deductions — it handles them all.</div>
+      <div class="item"><b>✘ Single top-up channel</b>Only USDT is accepted. If you don't touch crypto, there's a small learning curve.</div>
+      <div class="item"><b>✘ Early card-count limits</b>New accounts can't issue unlimited cards. After normal use for a while, contact customer service to unlock more card slots.</div>
+      <div class="item"><b>✘ Withdrawal fee</b>The platform does support withdrawing/refunding your balance (worth noting), but charges a 3% fee — weigh that cost yourself.</div>
+      <div class="item"><b>✘ Minimum card balance</b>A newly issued card must hold at least $20 in initial balance.</div>
+    </div>
+    <p>All in all, VCCMAMA is a distinctive USDT-deposit virtual card platform: simple registration, anonymity-friendly, instant top-ups — a great fit for users who hold crypto and also need international online payments. If you're looking for a channel to open and spend cards directly with USDT, it deserves a place on your platform-comparison list; weigh the pros and cons above and decide for yourself.</p>
+  </div>
+</section>
+
+<!-- ============ CHATGPT PAGE ============ -->
+<section id="chatgpt">
+  <div class="container">
+    <p class="meta">Translated from "chatgpt-virtual-card.html" · Published Aug 1, 2026 · ~8 min read</p>
+    <h2>2026's Latest: A Complete, Pitfall-Free Guide to Subscribing to ChatGPT Plus with VCCMAMA — US Card BINs 529366 / 486699 Built for AI Subscriptions</h2>
+    <p>Many people have hit this headache: you want ChatGPT Plus to unlock GPT-4o, web browsing, advanced image generation, and long-context conversations — but you're blocked everywhere. Either domestic bank cards simply don't support cross-border subscriptions, or the payment page errors out and declines on submit — and some people, through careless operations or a "dirty" environment, trigger OpenAI's risk controls, get throttled, lose payment privileges, or get banned outright.</p>
+    <p>By 2026, OpenAI's risk controls have leveled up again. Relying on Stripe's multi-layer payment verification, they examine card BIN jurisdiction, IP environment, account behavior, and billing details comprehensively. For users in restricted regions, doing it alone is harder than ever. This guide strictly follows <b>VCCMAMA's</b> latest operating rules, combined with real-world success cases and pitfalls from hundreds of paying customers — a complete, zero-pitfall tutorial.</p>
+
+    <h3>Why Choose VCCMAMA for ChatGPT Plus?</h3>
+    <p>Compared with ordinary overseas credit cards and niche payment tools, VCCMAMA's advantages in fitting ChatGPT's official subscription channel are clear:</p>
+    <div class="callout green">
+      <div class="t">Core Advantages of VCCMAMA for ChatGPT</div>
+      <ul style="margin:0">
+        <li><b>Officially compatible, precisely fitted:</b> BINs 529366 and 486699 are dedicated US-region card segments that fit OpenAI's Stripe payment system perfectly.</li>
+        <li><b>Low risk-control friction, high success rate:</b> a dedicated cross-border payment channel aligned with 2026 US-region ChatGPT subscription risk rules.</li>
+        <li><b>Fully self-service online:</b> registration, card issuing, top-ups, and payment all happen online — beginners can get started fast.</li>
+        <li><b>Transparent cost:</b> no markup, no hidden charges — far better value than top-up resellers.</li>
+      </ul>
+    </div>
+    <p>The shortcomings of common alternatives are obvious: domestic bank cards are almost all intercepted by OpenAI's risk controls; private foreign cards fail on mismatched billing addresses and messy IPs; third-party resellers overcharge and carry risks of account theft, mass bans, and vanished after-sales support. VCCMAMA's official channel sidesteps all of these traps.</p>
+
+    <h3>Core Steps for Subscribing with VCCMAMA</h3>
+    <p>Many subscription failures aren't operational errors — they trace back to sloppy preparation and an impure environment that triggers risk control prematurely. The steps below are tuned to OpenAI's 2026 rules; each is the field-tested optimal flow.</p>
+
+    <div class="card">
+      <h3>Step 1: Register and Issue a Card on the Official Site</h3>
+      <p>Log in to the VCCMAMA official site, register per the platform's guidance, and apply for US-region virtual credit cards suited to ChatGPT subscriptions — the <b>529366</b> and <b>486699</b> BINs are recommended. After issuing, verify the card status: make sure it's properly activated, not frozen, and has a sufficient balance topped up in advance — at least <b>$25</b> is advised.</p>
+      <div class="imgwrap">
+        <figure>
+          <img src="chatgpt-vcc.jpg" alt="VCCMAMA ChatGPT subscription card issuing interface">
+          <figcaption>VCCMAMA card-issuing interface for ChatGPT subscriptions.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Step 2: Set Up a Compliant Login Environment</h3>
+      <p>OpenAI's new risk controls scrutinize the network environment strictly. Free shared nodes and multi-user shared IPs are absolutely off-limits. Throughout the subscription, use a clean, fixed, dedicated <b>US static IP node</b>: no switching regions, no changing nodes, no mixing devices across registration, login, and payment.</p>
+      <div class="callout">
+        <div class="t">Network Environment Requirements</div>
+        <p style="margin:0">You must use a clean US static IP — no shared nodes. Never switch regions, change nodes, or mix devices during the process; frequent IP-location changes trigger risk controls.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Step 3: Register a Fresh Account</h3>
+      <p>Old accounts, accounts with free-trial history, and accounts with messy login environments all carry high risk weight and are unlikely to subscribe successfully. The safest approach: register a brand-new dedicated ChatGPT account, preferably with a Gmail address to avoid high-risk email penalties. Keep the whole process matched to the US network environment.</p>
+    </div>
+
+    <div class="card">
+      <h3>Step 4: Link the Virtual Card and Subscribe</h3>
+      <p>Enter ChatGPT's dedicated upgrade-to-Plus page, pick a monthly, quarterly, or annual plan as needed, and enter your VCCMAMA's card number, expiry, and security code accurately — ensuring the card details and billing jurisdiction match, eliminating address-mismatch errors. After double-checking, submit the payment. On success, GPT-4o, AI image generation, web search, and unlimited conversations unlock in real time.</p>
+      <div class="callout blue">
+        <div class="t">Recommended BIN Configuration</div>
+        <ul style="margin:0">
+          <li><b>First-choice BIN:</b> 529366 (US Mastercard, Credit card type).</li>
+          <li><b>Alternative BIN:</b> 486699 (US Mastercard).</li>
+          <li><b>Card issuing fee:</b> $2 per card.</li>
+          <li><b>Top-up fee:</b> 3.5% (negotiable at volume).</li>
+          <li><b>Suggested top-up:</b> $25 or more (covers the $20 monthly fee + pre-authorization buffer).</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Field-Tested Fixes for the Most Common Failure Problems</h3>
+    <p>We've distilled the paying experience of hundreds of VCCMAMA users into the high-frequency failure problems covering over 90% of 2026 subscription failures, each with a directly actionable fix. If you hit a payment error, block, or risk-control event, troubleshoot against this list.</p>
+
+    <div class="card">
+      <h3>Desktop Payment Failures</h3>
+      <p>Many users face repeated declines on the web, failed payment redirects, or outright card rejection — likely because web-side risk verification is stricter. In that case, <b>switch to the in-app purchase channel on mobile</b>: on iOS or Android, sign in with a dedicated US-region Apple ID or Google account, ensure there's sufficient balance or a valid international payment method on file, uninstall unofficial plugins and clear the app cache, then subscribe through the official ChatGPT app's in-app payment. In testing, this succeeds far more often than the desktop web flow.</p>
+    </div>
+
+    <div class="card">
+      <h3>Node Risk-Control Workarounds</h3>
+      <p>Mismatched node jurisdiction is a core trigger of payment failure. High-traffic nodes like Japan and Singapore have elevated risk thresholds and are especially prone to silent channel blocks. Multiple users reported that <b>switching the VPN node from Japan/Singapore to a quality UK static node</b> improved network stability and slashed risk-control probability, resolving most silent blocks. Also keep the node fixed throughout — don't hop jurisdictions.</p>
+    </div>
+
+    <div class="callout">
+      <div class="t">Ultimate Account Rules (2026's Biggest Risk-Control Minefields)</div>
+      <p><b>Never start the free trial on a new ChatGPT account!</b> The free-trial channel is under extremely strict scrutiny; once triggered, the account is flagged as a high-risk trial account and will most likely have payment privileges locked, making subscription impossible.</p>
+      <p style="margin:0"><b>The optimal standard flow:</b> use a clean US IP throughout; register the account, sign in to devices, and download the app with a dedicated US account only; <b>skip all free-trial entrances entirely</b>; subscribe immediately after registration using your VCCMAMA — zero risk control, maximum stability.</p>
+    </div>
+
+    <div class="card">
+      <h3>Troubleshooting High-Frequency Errors</h3>
+      <ul>
+        <li><b>Clear browser cache:</b> always clear cache and cookies before paying so stale login data doesn't interfere with transaction verification.</li>
+        <li><b>Ensure sufficient balance:</b> keep the VCCMAMA balance ample with pre-authorization funds reserved.</li>
+        <li><b>Never retry repeatedly:</b> if payment fails several times, stop immediately. Repeated retries get the account permanently flagged high-risk and the payment channel closed for good.</li>
+      </ul>
+    </div>
+
+    <h3>Final Word</h3>
+    <p>Combining OpenAI's 2026 rules with extensive field cases, the core of a stable ChatGPT Plus subscription boils down to three things: <b>a properly compatible payment channel, a pristine fixed US network environment, and account practices that avoid trial risk control</b>. Follow VCCMAMA's official standard flow plus these field-tested tips, and most people succeed on the first try — done with repeated payment failures, account risk control, and restricted privileges for good.</p>
+    <p>Once Plus is active, you can confidently enjoy GPT-4o's powerful reasoning, long-document analysis, AI image generation, and real-time web search — boosting efficiency across study, work, and content creation. Happy subscribing!</p>
+  </div>
+</section>
+
+<!-- ============ CLAUDE PAGE ============ -->
+<section id="claude">
+  <div class="container">
+    <p class="meta">Translated from "claude-virtual-card.html" · Published Jul 21, 2026 · ~3 min read</p>
+    <h2>A Virtual Card Dedicated to Claude Subscriptions — a Pure US Virtual Credit Card</h2>
+
+    <h3>The Pain Points of Paying for an Anthropic Claude AI Subscription</h3>
+    <p>As many know, because Anthropic must comply with US AI export restrictions, users in mainland China hit many obstacles when subscribing to the Claude model — IP address, payment card, and even KYC demands. To use the advanced US models like Claude Opus, users have to jump through hoops. The IP problem is relatively easy: just use a clean, high-quality VPN node. The payment card, however, must be a Mastercard or Visa issued by a local US bank, matching your IP line, to maximize the chance of avoiding bans and subscription cancellation.</p>
+    <div class="imgwrap">
+      <figure>
+        <img src="claude-ban-account.jpg" alt="Claude subscription virtual card solution">
+        <figcaption>Claude account and subscription risk illustration.</figcaption>
+      </figure>
+    </div>
+
+    <h3>So Which Virtual Card Should You Use to Subscribe to Claude?</h3>
+    <p>There are many virtual credit cards on the market: Hong Kong cards, US cards, Singapore cards, UK cards, and so on. One thing to note: <b>never choose a Hong Kong virtual card</b>, because Hong Kong is an unsupported region for Claude. Virtual credit cards from the US, Singapore, the UK, and other supported countries all work.</p>
+    <p>Most people use US IP lines, so the best choice is a US virtual credit card — matching the card's issuing region with the IP address.</p>
+    <div class="callout">
+      <div class="t">Important</div>
+      <p style="margin:0"><b>Hong Kong virtual cards do not work!</b> Hong Kong is an unsupported region for Claude; using one leads to failed subscriptions or account bans. Always choose cards issued in supported regions like the US, Singapore, or the UK.</p>
+    </div>
+
+    <h3>VCCMAMA's US 529366 Virtual Card Can Subscribe to Claude!</h3>
+    <p><b>VCCMAMA</b> is a veteran virtual credit card platform with six years of operation. It carries a dedicated Mastercard virtual card with BIN <b>529366</b>, issued by a local US bank — a Credit card type at the Purchasing (enterprise procurement) tier. It performs well on US e-commerce platforms and AI subscriptions, with a high success rate.</p>
+    <div class="callout blue">
+      <div class="t">Advantages of the 529366 Virtual Card</div>
+      <p style="margin:0 0 6px"><b>529366 is VCCMAMA's BIN dedicated to serving users subscribing to US model services like Claude and ChatGPT.</b></p>
+      <ul style="margin:0">
+        <li>Card BIN: 529366 (Mastercard)</li>
+        <li>Issuing bank: a local US bank</li>
+        <li>Card type: Credit (Purchasing / enterprise procurement tier)</li>
+        <li>Card issuing fee: $2 per card</li>
+        <li>Top-up fee: 3.5% (negotiable at volume)</li>
+        <li>Per-transaction cap: $5,000</li>
+      </ul>
+    </div>
+    <div class="imgwrap">
+      <figure>
+        <img src="claude-bin.jpg" alt="VCCMAMA 529366 card issuing interface">
+        <figcaption>VCCMAMA's 529366 virtual card issuing interface.</figcaption>
+      </figure>
+    </div>
+    <p>According to the platform's payment records, this BIN has successful Claude payment history. Of course, you can also confirm with the official online customer service — many factors are involved in subscribing to Claude, and user-side technique matters too, so a failed subscription isn't necessarily the card's fault.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="container">
+    <h2>Virtual Credit Cards — Frequently Asked Questions</h2>
+    <p>A collection of the most common virtual credit card questions and answers from the original site.</p>
+
+    <div class="card"><h3>Can I pay for AI subscriptions like ChatGPT and Claude?</h3><p>Yes. US AI services restrict both your access IP route and the card's issuing region. US and UK virtual cards both work for subscribing; Hong Kong virtual credit cards do not.</p></div>
+
+    <div class="card"><h3>Are your rates high? Are you the cheapest anywhere?</h3><p>For rates, contact us directly for details. We can't claim the absolute lowest, but it's quite cost-effective. If you're paying Facebook ad fees with heavy spend, the price is negotiable.</p></div>
+
+    <div class="card"><h3>Can the cards buy cryptocurrency?</h3><p>No. Only regular international online payment scenarios — cross-border e-commerce, ad marketing, paid subscriptions, and other compliant uses. Financial-type merchants are not supported.</p></div>
+
+    <div class="card"><h3>Can it pay the Google Play Store, Google developer accounts, or GCP/Google Cloud?</h3><p>Absolutely — those are basic scenarios.</p></div>
+
+    <div class="card"><h3>Can it pay Amazon seller monthly fees?</h3><p>Payment works, but honestly: if you plan to run a cross-border store seriously for the long term, pay Amazon's rent with your physical bank card. A virtual credit card is better suited to registering Amazon buyer accounts or bulk-registering stores.</p></div>
+
+    <div class="card"><h3>If I top up and later don't want the service, can I withdraw my money?</h3><p>That's fundamental. If you stop using the platform, contact customer service to request a withdrawal — the platform won't keep your hard-earned money.</p></div>
+
+    <div class="card"><h3>Is there a minimum top-up for card issuing?</h3><p>Yes — every virtual card platform has a minimum initial top-up, usually around $20. It filters out freebie-abusers and helps keep the platform stable long-term.</p></div>
+
+    <div class="card"><h3>How do I contact customer service?</h3><p>Customer service contact details are at the top-right of the page, staffed 24/7 to handle card issues at any time; you can also email <a href="mailto:vccmama@mail.ru">vccmama@mail.ru</a>.</p></div>
+
+    <div class="card"><h3>Is AliExpress ordering supported?</h3><p>Yes — many cross-border e-commerce sellers buy on AliExpress, and the platform's cards support AliExpress purchases.</p></div>
+
+    <div class="card"><h3>My ChatGPT subscription was declined — why?</h3><p>As mentioned, these US AI services check not only the card's issuing region but also your IP address. If the IP isn't in a supported country or doesn't match the card's issuing country, risk control may kick in and the payment fails. Use a clean, native US IP line together with a US virtual credit card to lower the rejection odds.</p></div>
+
+    <div class="card"><h3>Can I just buy a ready-made Visa card number?</h3><p>No. This is a virtual card issuing platform — you register your own account, top up, and issue your own Mastercard/Visa virtual cards.</p></div>
+
+    <div class="card"><h3>Do you have $1 verification cards?</h3><p>We know those are for freebie account abuse — not our business here. All cards require a proper top-up for normal spending; no scatter cards at one-dollar amounts.</p></div>
+
+    <div class="card"><h3>Can it book travel / OTA reservations?</h3><p>Yes — commonly international flights, hotels, concert tickets, and so on. We even have international travel-agency clients cooperating with us.</p></div>
+
+    <div class="card"><h3>Can it handle US e-commerce "CT" (chargeback) business?</h3><p>No! Only compliant payment scenarios are supported — mass refunds are not.</p></div>
+
+    <div class="card"><h3>Can I open cards anonymously?</h3><p>Telecom fraud is rampant these days, so to protect user privacy: USDT top-ups can be done without KYC.</p></div>
+
+    <div class="card"><h3>Are the virtual cards disposable?</h3><p>Absolutely not! Virtual credit cards issued on this platform are valid for 2–3 years, can be recharged and reused repeatedly — not one-time throwaway cards.</p></div>
+
+    <div class="card"><h3>Do you issue cards for us, or do we open them ourselves?</h3><p>After registering, you can log into the dashboard yourself to top up, issue cards, delete cards, and view card transaction details.</p></div>
+
+    <div class="card"><h3>Is 3DS verification supported?</h3><p>Some card BINs support 3DS verification, and the verification code can be viewed in the dashboard — e.g., for Facebook ad account card linking.</p></div>
+
+    <div class="card"><h3>Can individual users register?</h3><p>Yes. VCCMAMA supports USDT top-ups with no KYC verification; individual users can register and use it directly.</p></div>
+
+    <div class="card"><h3>What should I watch out for with USDT top-ups?</h3><p>USDT top-ups support the TRC20 network only, and the minimum is 20 USDT. Funds topped up via USDT can only be spent and cannot be withdrawn, so avoid topping up too much at once.</p></div>
+
+    <div class="card"><h3>Which BIN can subscribe to ChatGPT?</h3><p>Field-tested: the 456599 BIN successfully pays OpenAI/ChatGPT (IP requirements apply at payment — use a clean IP matching the region). That BIN can also be linked to Alipay for spending. Tested May 2026.</p></div>
+
+    <div class="card"><h3>Can it be linked to Alipay for spending?</h3><p>Some BINs (e.g., 456599) have been tested and can link to Alipay. But note: official platform policy does not support mainland platforms (WeChat, Alipay, etc.) — actual linking varies by BIN and policy changes.</p></div>
+
+    <div class="card"><h3>Can virtual credit cards receive refunds?</h3><p>Yes — refunded funds return to your virtual credit card account.</p></div>
+
+    <div class="card"><h3>Are virtual credit cards safe?</h3><p>Generally yes, and safer: they don't expose your real card information. They can also be used for one-off transactions, effectively reducing the risk of credit card info theft. Funds are custodied by a licensed third-party institution — safe and reliable.</p></div>
+
+    <div class="card"><h3>Which payment platforms are supported?</h3><p>Ad platforms: Facebook, Google, TikTok, Amazon, Twitter, etc. Subscriptions: ChatGPT, OpenAI, Claude, Cursor, Apple, Google, Gemini, Midjourney, Grok, Telegram, and more. 30+ global regions supported for diverse cross-border spending.</p></div>
+
+    <div class="card"><h3>What is a virtual credit card?</h3><p>A credit card with no physical form — all transactions happen online. A virtual card typically has just a card number, expiry date, and CVV.</p></div>
+
+    <div class="card"><h3>Why choose VCCMAMA over other platforms?</h3><p>Many virtual card platforms on the market collapse or run off after a while — in the end because the entry barrier is too low and abuse is rampant. VCCMAMA keeps a certain threshold and sensible user policies, preventing abuse and improving stability. If you need bulk issuing and multiple BINs, VCCMAMA is a great fit.</p></div>
+
+    <div class="card"><h3>Is a credit check needed to open cards online?</h3><p>No. Register, top up, and issue cards directly — cards are issued wholesale online, with no credit-history review.</p></div>
+
+    <div class="card"><h3>Which card BINs (prefixes) does VCCMAMA currently have?</h3><p>Currently listed: 4367, 4866, 4***, 529366, 527375, 544923, 558325, 545020, 658706, 524897, 553370, 556371, 556167, 553437 — with fresh BINs added continuously.</p></div>
+  </div>
+</section>
+
+<!-- ============ CTA / FOOTER ============ -->
+<section style="border-bottom:none">
+  <div class="container" style="text-align:center">
+    <h2>Start Your Cross-Border Payment Journey Today</h2>
+    <p>The VCCMAMA card-issuing center — making global payments simpler, safer, and more efficient.</p>
+    <p>Whether it's Facebook/TikTok ad spending, ChatGPT/Claude AI tool subscriptions, or cross-border e-commerce purchasing, VCCMAMA delivers stable, reliable virtual credit cards. Enterprise rates as low as 1%, bulk card issuing supported.</p>
+    <a class="btn" href="https://dashboard.fotoncard.com/#/pages/register?agent=388832">Register Now</a>
+    <p style="color:var(--muted);font-size:.9rem">No business certification required · KYC-free USDT top-ups · Multiple BINs available</p>
+  </div>
+</section>
+
+<footer>
+  <p class="high">VCCMAMA Virtual Card Platform — Professional VCC Issuer</p>
+  <p>⚠️ Disclaimer: this site only provides recommendation information. Make decisions carefully based on your own needs; risks are your own. Virtual card platform policies may change at any time — always defer to the platform's latest official announcements.</p>
+  <p>Contact: <a href="mailto:vccmama@mail.ru" style="color:#60a5fa">vccmama@mail.ru</a> · Registration: <a href="https://dashboard.fotoncard.com/#/pages/register?agent=388832" style="color:#60a5fa">dashboard.fotoncard.com (invite code 388832)</a></p>
+  <p style="margin-top:14px">© 2026 VCCMAMA — English aggregated &amp; translated edition. Source pages: www.vccmama.com (homepage + 8 guide articles). All images saved locally in this directory.</p>
+</footer>
+
+</body>
+</html>
