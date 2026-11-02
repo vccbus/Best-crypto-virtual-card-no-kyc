@@ -10,26 +10,6 @@ Secure payment solutions for ad spending and AI subscriptions. An enterprise-gra
 
 ## Table of Contents
 
-- [About](#about)
-- [Advantages](#advantages)
-- [Platform Features](#features)
-- [Fees](#info)
-- [Use Cases](#usecases)
-- [Ad Spending](#advertising)
-- [AI Subscriptions](#ai-tools)
-- [Getting Started](#guide)
-- [Tips & Cautions](#tips)
-- [Card BIN Guide](#bins)
-- [USDT Card](#usdt)
-- [High-Value VCC](#highvalue)
-- [No KYC Crypto Card](#nokyc)
-- [Invite Code](#invite)
-- [USDT Deposit](#deposit)
-- [ChatGPT Guide](#chatgpt)
-- [FAQ](#faq)
-
----
-
 ## Best Crypto Virtual Card No KYC: About the FotonCard Platform
 
 ### A Established Virtual Credit Card Issuer, Running Stably for 6 Years
