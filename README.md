@@ -5,7 +5,6 @@ BEST CRYPTO VIRTUAL CARD NO KYC · Global Payment & Collection
 Secure payment solutions for ad spending and AI subscriptions. An enterprise-grade virtual credit card service from a professional card issuer, with real-time USDT top-ups — covering Facebook / TikTok / Google ad campaigns, ChatGPT Ads, ChatGPT / Claude and other AI tool subscriptions, cross-border e-commerce purchasing, and more. The FotonCard mobile app is live, so you can manage your virtual cards anytime, anywhere.
 
 **[Get Started Now](https://dashboard.fotoncard.com/#/pages/register?agent=388832)**
-**[Learn More](#about)**
 
 - USDT Top-up / No Monthly Fee / 3DS Verification / Multiple BINs / Bulk Card Issuing / ChatGPT Plus / Ad Billing / Overseas Shopping
 
